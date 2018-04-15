@@ -1,0 +1,4 @@
+#!/usr/bin/with-contenv sh
+
+cat "/config/passwd" | /usr/bin/encfs -S -o allow_other,nonempty /encrypted /decrypted 
+tail -f /dev/null
