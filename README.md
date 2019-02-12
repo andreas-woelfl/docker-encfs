@@ -11,7 +11,7 @@ docker run -it --name encfs-decrypt \
    -v "/path/to/target/directory:/decrypted:shared" \
    -v "/path/to/password/file:/config/passwd:ro" \
    -v "/path/to/encfs.xml:/config/encfs.xml:ro" \
-woelfl/encfs
+woelfl/docker-encfs
 ```
 ## Requirements
 Source directory for the encrypted files:
@@ -38,7 +38,7 @@ version: '2.1'
 services:
   encfs-decrypt:
     container_name: encfs-decrypt
-    image: woelfl/encfs
+    image: woelfl/docker-encfs
     devices:
       - /dev/fuse
     cap_add:
