@@ -27,6 +27,19 @@ File containting the EncFS config:
 ```
 -v "/path/to/encfs.xml:/config/encfs.xml:ro"
 ```
+
+## Optional
+Environment variable to specify the encfs password
+```
+-e ENCFS_PWD=pwd
+```
+
+Environment variable to pass options to encfs (such as -o allow_other or --reverse)
+```
+-e ENCFS_OPTS=-o allow_other -o nonempty --reverse
+```
+
+
 ## Docker Compose
 
 Docker compose file:
