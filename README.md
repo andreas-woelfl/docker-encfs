@@ -14,12 +14,12 @@ docker run -it --name encfs-decrypt \
    -v "/path/to/encfs.xml:/config/encfs.xml:ro" \
 woelfl/docker-encfs
 ```
-## Requirements
-Source directory for the source files (i.e., encrypted):
+## Required
+Source directory (e.g., encrypted files):
 ```
 -v "/path/to/source/directory:/src:shared"
 ```
-Target directory for the target files (i.e., decrypted): 
+Target directory (e.g.., decrypted files): 
 ```
 -v "/path/to/target/directory:/dest:shared"
 ```
@@ -29,12 +29,12 @@ File containting the EncFS config:
 ```
 
 ## Optional
-Environment variable to specify the encfs password
+Environment variable `ENCFS_PWD` to specify the encfs password
 ```
 -e ENCFS_PWD=pwd
 ```
 
-Environment variable to pass options to encfs (such as -o allow_other or --reverse)
+Environment variable `ENCFS_OPTS` to pass options to encfs (such as -o allow_other or --reverse)
 ```
 -e ENCFS_OPTS=-o allow_other -o nonempty --reverse
 ```
