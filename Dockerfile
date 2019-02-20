@@ -18,12 +18,12 @@ RUN \
 RUN apk del curl tar wget
 
 # create dirs
-RUN mkdir -p /encrypted /decrypted /config
+RUN mkdir -p /src /dest /config
 
 # copy services
 COPY root/ / 
 
 # create volumes
-VOLUME /encrypted /decrypted /config
+VOLUME /src /dest /config
 
 ENTRYPOINT ["/init"]

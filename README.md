@@ -7,8 +7,8 @@ docker run -it --name encfs-decrypt \
    --cap-add SYS_ADMIN \
    --device /dev/fuse \
    --security-opt apparmor:unconfined \
-   -v "/path/to/source/directory:/encrypted:shared" \
-   -v "/path/to/target/directory:/decrypted:shared" \
+   -v "/path/to/source/directory:/src:shared" \
+   -v "/path/to/target/directory:/dest:shared" \
    -v "/path/to/password/file:/config/passwd:ro" \
    -v "/path/to/encfs.xml:/config/encfs.xml:ro" \
 woelfl/docker-encfs
@@ -16,11 +16,11 @@ woelfl/docker-encfs
 ## Requirements
 Source directory for the encrypted files:
 ```
--v "/path/to/source/directory:/encrypted:shared"
+-v "/path/to/source/directory:/src:shared"
 ```
 Target directory for the decrypted files: 
 ```
--v "/path/to/source/directory:/encrypted:shared"
+-v "/path/to/target/directory:/dest:shared"
 ```
 File containting the EncFS password:
 ```
@@ -46,7 +46,7 @@ services:
     security_opt:
       - apparmor:unconfined
     volumes:
-      - /path/to/source/directory:/encrypted:shared
-      - /path/to/target/directory:/decrypted:shared
+      - /path/to/source/directory:/src:shared
+      - /path/to/target/directory:/dest:shared
       - /path/to/password/file:/config/passwd:ro
       - /path/to/encfs.xml:/config/encfs.xml:ro
