@@ -1,4 +1,7 @@
 #!/usr/bin/with-contenv sh
-
-cat "/config/passwd" | /usr/bin/encfs ${ENCFS_OPTS} /src /dest
+if [ $ENCFS_PWD ]; then
+   /usr/bin/encfs $ENCFS_OPTS --extpass="echo $ENCFS_PWD" /src /dest
+else
+   /usr/bin/encfs $ENCFS_OPTS /src /dest
+fi
 tail -f /dev/null

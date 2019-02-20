@@ -7,24 +7,21 @@ docker run -it --name encfs-decrypt \
    --cap-add SYS_ADMIN \
    --device /dev/fuse \
    --security-opt apparmor:unconfined \
+   -e ENCFS_PWD=pwd \ 
+   -e ENCFS_OPTS=-o allow_other \
    -v "/path/to/source/directory:/src:shared" \
    -v "/path/to/target/directory:/dest:shared" \
-   -v "/path/to/password/file:/config/passwd:ro" \
    -v "/path/to/encfs.xml:/config/encfs.xml:ro" \
 woelfl/docker-encfs
 ```
 ## Requirements
-Source directory for the encrypted files:
+Source directory for the source files (i.e., encrypted):
 ```
 -v "/path/to/source/directory:/src:shared"
 ```
-Target directory for the decrypted files: 
+Target directory for the target files (i.e., decrypted): 
 ```
 -v "/path/to/target/directory:/dest:shared"
-```
-File containting the EncFS password:
-```
--v "/path/to/password/file:/config/passwd:ro"
 ```
 File containting the EncFS config:
 ```
@@ -32,7 +29,7 @@ File containting the EncFS config:
 ```
 ## Docker Compose
 
-Exemplary docker compose file:
+Docker compose file:
 ```
 version: '2.1'
 services:
@@ -45,8 +42,10 @@ services:
       - SYS_ADMIN
     security_opt:
       - apparmor:unconfined
+    environment:
+      - ENCFS_PWD=pwd
+      - ENCFS_OPTS=-o allow_other,nonempty
     volumes:
       - /path/to/source/directory:/src:shared
       - /path/to/target/directory:/dest:shared
-      - /path/to/password/file:/config/passwd:ro
       - /path/to/encfs.xml:/config/encfs.xml:ro
